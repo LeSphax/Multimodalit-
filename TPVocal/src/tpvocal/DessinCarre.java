@@ -13,7 +13,7 @@ import java.awt.Point;
  *
  * @author kerbrase
  */
-public class DessinCarré extends javax.swing.JPanel {
+public class DessinCarre extends javax.swing.JPanel {
 
     Point position;
     private static final int WIDTH = 30;
@@ -22,7 +22,7 @@ public class DessinCarré extends javax.swing.JPanel {
     /**
      * Creates new form DessinCarré
      */
-    public DessinCarré() {
+    public DessinCarre() {
         initComponents();
         position = new Point(100, 100);
     }

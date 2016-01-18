@@ -46,7 +46,7 @@ public class TPVocal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        dessinCarré1 = new tpvocal.DessinCarré();
+        dessinCarré1 = new tpvocal.DessinCarre();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -112,7 +112,7 @@ public class TPVocal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private tpvocal.DessinCarré dessinCarré1;
+    private tpvocal.DessinCarre dessinCarré1;
     // End of variables declaration//GEN-END:variables
 
     public void changePositionSquare(Direction direction) {

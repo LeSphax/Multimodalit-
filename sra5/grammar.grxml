@@ -27,6 +27,7 @@
       <item>rectangle</item>
 	  <item>ellipse</item>
     </one-of>
+	<tag>out.text  = "Type:shape Valeur:" + meta.current().text;</tag>
   </rule> 
        
    <rule id="position">
