@@ -12,7 +12,7 @@ import java.awt.Point;
  *
  * @author kerbrase
  */
-public interface Controller {
+public interface IController {
     
     public void saidColor(Color color);
     

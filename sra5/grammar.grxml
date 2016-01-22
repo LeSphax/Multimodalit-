@@ -15,19 +15,20 @@
     <one-of>
       <item><ruleref uri="#couleur"/></item>
       <item><ruleref uri="#position"/></item>
+	  <item><ruleref uri="#objet"/></item>
     </one-of>          
     <tag>out = rules.latest().text;</tag>
     <ruleref special="GARBAGE" />
   </rule>
   
-  <rule id="shape">
+  <rule id="objet">
 	<ruleref special="GARBAGE" />
     <one-of>
       <item>objet</item>
       <item>rectangle</item>
 	  <item>ellipse</item>
     </one-of>
-	<tag>out.text  = "Type:shape Valeur:" + meta.current().text;</tag>
+	<tag>out.text  = "Type:objet Valeur:" + meta.current().text;</tag>
   </rule> 
        
    <rule id="position">

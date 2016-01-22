@@ -11,5 +11,8 @@ package interfaces;
  */
 public interface VocalRecognitionAPI {
     
+    public static final String COLOR = "couleur";
+    public static final String POSITION = "position";
+    public static final String OBJECT = "objet";
     
 }
