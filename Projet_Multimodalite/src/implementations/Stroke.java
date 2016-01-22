@@ -14,19 +14,19 @@ public class Stroke
 	
 	public Stroke()
 	{
-		listePoint = new ArrayList<Point2D.Double>();
+		listePoint = new ArrayList<>();
 	}
 	
 	public void init()
 	{
 		listePoint = null;
 		centroid = null;
-		listePoint = new ArrayList<Point2D.Double>();
+		listePoint = new ArrayList<>();
 	}
 	
 	public boolean isEmpty()
 	{
-		if(listePoint==null || listePoint.size()==0)
+		if(listePoint==null || listePoint.isEmpty())
 			return true;
 		return false;
 	}
@@ -164,7 +164,7 @@ public class Stroke
 	
 	public ArrayList<Point2D.Double> scaleToSquare()
 	{
-		ArrayList<Point2D.Double> newPoints = new ArrayList<Point2D.Double>();
+		ArrayList<Point2D.Double> newPoints = new ArrayList<>();
 		Rectangle2D.Double boundingBox = getBoundingBox();
 		for(int i=0;i<listePoint.size();i++)
 		{

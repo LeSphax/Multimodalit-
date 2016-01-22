@@ -17,7 +17,7 @@ public class Controller implements interfaces.IController{
 
     @Override
     public void saidColor(Color color) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(color);
     }
 
     @Override
@@ -27,12 +27,12 @@ public class Controller implements interfaces.IController{
 
     @Override
     public void saidShape(Constants.Shape shape) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println(shape);
     }
 
     @Override
     public void saidPosition() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("Position");
     }
 
     @Override
@@ -44,5 +44,6 @@ public class Controller implements interfaces.IController{
     public void gestureDetected(Constants.Gesture gesture) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+    
     
 }

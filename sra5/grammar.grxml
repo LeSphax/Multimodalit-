@@ -28,16 +28,16 @@
       <item>rectangle</item>
 	  <item>ellipse</item>
     </one-of>
-	<tag>out.text  = "Type:objet Valeur:" + meta.current().text;</tag>
+	<tag>out.text  = "Type:objet Value:" + meta.current().text;</tag>
   </rule> 
        
    <rule id="position">
     <one-of>
       <item>ici</item>
-      <item>là</item>
-	  <item>à cette position</item>
+      <item>la</item>
+	  <item>a cette position</item>
     </one-of>
-	<tag>out.text  = "Type:position Valeur:" + meta.current().text;</tag>
+	<tag>out.text  = "Type:position Value:" + meta.current().text;</tag>
   </rule> 
   
   <rule id="couleur">
@@ -55,7 +55,7 @@
 	  <item>blanc</item>
 	  <item>de cette couleur</item>
     </one-of>
-	<tag>out.text  = "Type:couleur Valeur:" + meta.current().text;</tag>
+	<tag>out.text  = "Type:couleur Value:" + meta.current().text;</tag>
   </rule>
   
 </grammar>

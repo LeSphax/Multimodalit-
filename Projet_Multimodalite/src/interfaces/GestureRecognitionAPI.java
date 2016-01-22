@@ -5,15 +5,19 @@
  */
 package interfaces;
 
-import implementations.Stroke;
+import java.awt.geom.Point2D;
 
 /**
  *
  * @author kerbrase
  */
 public interface GestureRecognitionAPI {
-    
+
     public void askPointerPosition();
-    
-    public void sendGesture(Stroke stroke);
+
+    public void mouseDragged(Point2D.Double event);
+
+    public void mouseReleased(Point2D.Double event);
+
+    public void mousePressed(Point2D.Double event);
 }

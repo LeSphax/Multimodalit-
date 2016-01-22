@@ -16,6 +16,7 @@ import fr.dgac.ivy.*;
 import interfaces.Constants;
 import interfaces.VocalRecognitionAPI;
 import java.awt.Color;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -42,7 +43,7 @@ class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI {
     public void receive(IvyClient client, String[] commands) {
         String type = commands[0];
         String value = commands[1];
-        float confidence = Float.parseFloat(commands[2]);
+        float confidence = Float.parseFloat(commands[2].replace(",", "."));
 
         switch (type) {
             case VocalRecognitionAPI.COLOR:
@@ -52,7 +53,7 @@ class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI {
                 break;
             case VocalRecognitionAPI.OBJECT:
                 if (confidence > 0.5f) {
-                    controller.saidShape(Constants.Shape.valueOf(value));
+                    controller.saidShape(Constants.Shape.valueOf(value.toUpperCase()));
                 }
                 break;
             case VocalRecognitionAPI.POSITION:
@@ -76,6 +77,7 @@ class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI {
     }
 
     public static void initMap() {
+        mapColors = new HashMap<>();
         mapColors.put("noir", Color.black);
         mapColors.put("bleu", Color.blue);
         mapColors.put("rouge", Color.red);
