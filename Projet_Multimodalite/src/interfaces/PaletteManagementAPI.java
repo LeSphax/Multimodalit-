@@ -19,5 +19,9 @@ public interface PaletteManagementAPI {
     public void deleteObject(Constants.Shape shape, Point position, Color color);
     
     public void moveObject(Point origin, Point destination);
+    
+    public void moveObject(Point origin, Constants.Shape shape, Point destination);
+    
+    public void moveObject(Point origin, Constants.Shape shape, Color color, Point destination);
 
 }
