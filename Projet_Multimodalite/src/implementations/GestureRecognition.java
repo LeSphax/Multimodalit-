@@ -3,17 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package interfaces;
-
-import implementations.Stroke;
+package implementations;
 
 /**
  *
  * @author kerbrase
  */
-public interface GestureRecognitionAPI {
+public class GestureRecognition {
     
-    public void askPointerPosition();
-    
-    public void sendGesture(Stroke stroke);
 }

@@ -10,14 +10,28 @@ package interfaces;
  * @author kerbrase
  */
 public interface Constants {
-    
-    public enum Shape{
-        RECTANGLE,
-        ELLIPSE,
-        OBJET
+
+    public enum Shape {
+
+        RECTANGLE("Rectangle"),
+        ELLIPSE("Ellipse"),
+        OBJET("Objet");
+        private final String name;
+
+        private Shape(String s) {
+            name = s;
+        }
+
+        public boolean equalsName(String otherName) {
+            return (otherName == null) ? false : name.equals(otherName);
+        }
+
+        public String toString() {
+            return this.name;
+        }
     }
-    
-    public enum Gesture{
-        
+
+    public enum Gesture {
+
     }
 }
