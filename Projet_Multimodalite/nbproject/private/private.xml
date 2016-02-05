@@ -1,7 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2">
+        <file>
+            <url>src/implementations/GesturePanel.java</url>
+            <bookmark id="2">
+                <name/>
+                <line>117</line>
+                <key/>
+            </bookmark>
+        </file>
+        <file>
+            <url>src/implementations/GestureRecognition.java</url>
+            <bookmark id="1">
+                <name/>
+                <line>0</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/GesturePanel.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/interfaces/GestureRecognitionAPI.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/interfaces/IController.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/interfaces/VocalRecognitionAPI.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/Template.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/LearningFrame.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/tests/TestPalette.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/GestureRecognition.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/Stroke.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/tests/TestProjetSIsitavu.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/Controller.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/Palette.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/VocalRecognition.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/ColorOfPoint.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/interfaces/Constants.java</file>
+            <file>file:/C:/Users/kerbrase.MIHM.002/Desktop/Multimodalité/Projet_Multimodalite/src/implementations/VocalSynthesis.java</file>
+        </group>
     </open-files>
 </project-private>

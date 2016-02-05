@@ -5,7 +5,6 @@
  */
 package interfaces;
 
-import java.awt.Color;
 import java.awt.Point;
 
 /**
@@ -14,9 +13,9 @@ import java.awt.Point;
  */
 public interface IController {
     
-    public void saidColor(Color color);
+    public void saidColor(String color);
     
-    public void saidToCopyObjectColor();
+    public void receiveColor(String color);
     
     public void saidShape(Constants.Shape shape);
     
@@ -24,5 +23,5 @@ public interface IController {
     
     public void receivePointerPosition(Point point);
     
-    public void gestureDetected(Constants.Gesture gesture);
+    public void gestureDetected(GestureRecognitionAPI.Gesture gesture);
 }

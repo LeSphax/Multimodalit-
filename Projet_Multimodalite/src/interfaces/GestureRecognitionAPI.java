@@ -13,11 +13,17 @@ import java.awt.geom.Point2D;
  */
 public interface GestureRecognitionAPI {
 
-    public void askPointerPosition();
 
     public void mouseDragged(Point2D.Double event);
 
-    public void mouseReleased(Point2D.Double event);
+    public Gesture mouseReleased(Point2D.Double event);
 
     public void mousePressed(Point2D.Double event);
+    
+    public enum Gesture {
+        Rectangle,
+        Ellipse,
+        Supprimer,
+        Deplacer
+    }
 }

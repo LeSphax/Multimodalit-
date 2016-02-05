@@ -18,10 +18,4 @@ public interface Constants {
         OBJET;
         
     }
-
-    public enum Gesture {
-        Creer,
-        Supprimer,
-        Deplacer
-    }
 }

@@ -14,16 +14,13 @@ import java.awt.Point;
  */
 public interface PaletteManagementAPI {
     
-    public void createObject(Constants.Shape shape, Point position, Color color);
+    public void createObject(Constants.Shape shape, Point position, String color);
     
-    public void deleteObject(Constants.Shape shape);
+    public void deleteObject(Constants.Shape shape, String color, Point position);
     
-    public void deleteObject(Constants.Shape shape, Color color);
-    
-    public void moveObject(Point origin, Point destination);
-    
-    public void moveObject(Point origin, Constants.Shape shape, Point destination);
-    
-    public void moveObject(Point origin, Constants.Shape shape, Color color, Point destination);
+    public void moveObject(Point origin, Constants.Shape shape, String color, Point destination);
 
+    public void askColor(Point position, IController controller);
+
+    
 }
