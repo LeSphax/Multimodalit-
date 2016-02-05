@@ -32,6 +32,8 @@ public class Palette implements PaletteManagementAPI {
     private int action;
     private String shape;
     private String color;
+    
+    private IController controller;
 
     public Palette() {
         try {
@@ -40,88 +42,100 @@ public class Palette implements PaletteManagementAPI {
             callback = new IvyMessageListener() {
                 @Override
                 public void receive(IvyClient ic, String[] strings) {
-                    String nom;
-                    System.out.println(strings[2]);
-                    nom = strings[2];
-                    try {
-                        if (action == 0) {
-                            //for(String n:nom){
-                            if (shape == null) {
-                                if (color != null) {
-                                    System.out.println("Palette:DemanderInfo null nom=" + nom);
-                                    bus.sendMsg("Palette:DemanderInfo nom=" + nom);
-                                } else {
-                                    System.out.println("Delete object null" + nom);
-                                    bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
-                                    //shape = null;
-                                }
-                            } else if (shape.equals(nom.substring(0, 1))){
-                               if (color != null) {
-                                   System.out.println("Palette:DemanderInfo nom=" + nom + shape);
-                                    bus.sendMsg("Palette:DemanderInfo nom=" + nom);
-                                } else {
-                                   
-                                    System.out.println("Delete object shape" + nom);
-                                    bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
-                                    //shape = null;
-                                }
-                            }
-                     
+                    if (action !=3){
+                        String nom;
+                        System.out.println(strings[2]);
+                        nom = strings[2];
+                        try {
+                            if (action == 0) {
+                                //for(String n:nom){
+                                if (shape == null) {
+                                    if (color != null) {
+                                        System.out.println("Palette:DemanderInfo null nom=" + nom);
+                                        bus.sendMsg("Palette:DemanderInfo nom=" + nom);
+                                    } else {
+                                        System.out.println("Delete object null" + nom);
+                                        bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
+                                        //shape = null;
+                                    }
+                                } else if (shape.equals(nom.substring(0, 1))){
+                                   if (color != null) {
+                                       System.out.println("Palette:DemanderInfo nom=" + nom + shape);
+                                        bus.sendMsg("Palette:DemanderInfo nom=" + nom);
+                                    } else {
 
-                            //}
-                        } else if (action == 1) {
-                            if (shape == null) {
-                                if (color != null) {
-                                    System.out.println("Palette:DemanderInfo null nom=" + nom);
-                                    bus.sendMsg("Palette:DemanderInfo nom=" + nom);
-                                } else {
-                                     System.out.println("Move object null" + nom);
-                                     bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
-                                    //shape = null;
+                                        System.out.println("Delete object shape" + nom);
+                                        bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
+                                        //shape = null;
+                                    }
                                 }
-                            } else if (shape.equals(nom.substring(0, 1))){
-                               if (color != null) {
-                                   System.out.println("Palette:DemanderInfo nom=" + nom);
-                                    bus.sendMsg("Palette:DemanderInfo nom=" + nom);
-                                } else {
-                                     System.out.println("Move object shape" + nom);
-                                     bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
-                                    //shape = null;
-                                }
-                            }
-                            //for(String n:nom){
-                           
-                            //}
 
+
+                                //}
+                            } else if (action == 1) {
+                                if (shape == null) {
+                                    if (color != null) {
+                                        System.out.println("Palette:DemanderInfo null nom=" + nom);
+                                        bus.sendMsg("Palette:DemanderInfo nom=" + nom);
+                                    } else {
+                                         System.out.println("Move object null" + nom);
+                                         bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
+                                        //shape = null;
+                                    }
+                                } else if (shape.equals(nom.substring(0, 1))){
+                                   if (color != null) {
+                                       System.out.println("Palette:DemanderInfo nom=" + nom);
+                                        bus.sendMsg("Palette:DemanderInfo nom=" + nom);
+                                    } else {
+                                         System.out.println("Move object shape" + nom);
+                                         bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
+                                        //shape = null;
+                                    }
+                                }
+                                //for(String n:nom){
+
+                                //}
+
+                            }
+                        } catch (IvyException ex) {
+                            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
                         }
-                    } catch (IvyException ex) {
-                        Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+                    } else {
+                        String nom = strings[2];
+                        try {
+                            bus.sendMsg("Palette:DemanderInfo nom=" + nom);
+                        } catch (IvyException ex) {
+                            Logger.getLogger(ColorOfPoint.class.getName()).log(Level.SEVERE, null, ex);
+                        }
                     }
                 }
             };
-            callback2 = new IvyMessageListener() {
-                @Override
-                public void receive(IvyClient ic, String[] strings) {
+            callback2 = (IvyClient ic, String[] strings) -> {
+                if (action != 3){
                     System.out.println(strings[5]);
                     String couleur = strings[5];
                     String nom = strings[0];
-                    
                     try {
-                       if (color.equals(couleur)) {
-                           if (action == 0) {
+                        if (color.equals(couleur)) {
+                            if (action == 0) {
                                 System.out.println("Delete object color" + nom);
                                 bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
-                            //color = null;
+                                //color = null;
                             } else if (action == 1){
                                 System.out.println("Move object color" + nom);
                                 bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
                             }
-                       }
+                        }
                     } catch (IvyException ex) {
                         Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
                     }
+                } else {
+                    color = strings[5];
+                    System.out.println("Picking couleur " + color);
+                    controller.receiveColor(color);
                 }
             };
+
 
             bus.bindMsg("Palette:ResultatTesterPoint x=(.*) y=(.*) nom=(.*)", callback);
             bus.bindMsg("Palette:Info nom=(.*) x=(.*) y=(.*) longueur(.*) hauteur(.*) couleurFond=(.*) couleurContour(.*)", callback2);
@@ -185,12 +199,16 @@ public class Palette implements PaletteManagementAPI {
     @Override
     public void deleteObject(Constants.Shape shape, String color, Point position) {
         try {
-            if (shape == RECTANGLE) {
-                this.shape = "R";
-            } else if (shape == ELLIPSE){
-                this.shape = "E";
-            } else {
-                this.shape = null;
+            if (null != shape) switch (shape) {
+                case RECTANGLE:
+                    this.shape = "R";
+                    break;
+                case ELLIPSE:
+                    this.shape = "E";
+                    break;
+                default:
+                    this.shape = null;
+                    break;
             }
             this.color = color;
             System.out.println("sending message");
@@ -204,13 +222,17 @@ public class Palette implements PaletteManagementAPI {
     @Override
     public void moveObject(Point origin, Constants.Shape shape, String color, Point destination) {
        try {
-           if (shape == RECTANGLE) {
-                this.shape = "R";
-            } else if (shape == ELLIPSE){
-                this.shape = "E";
-            } else {
-                this.shape = null;
-            }
+           if (null != shape) switch (shape) {
+               case RECTANGLE:
+                   this.shape = "R";
+                   break;
+               case ELLIPSE:
+                   this.shape = "E";
+                   break;
+               default:
+                   this.shape = null;
+                   break;
+           }
             this.color = color;
             System.out.println("sending message");
             this.destination = new Point(destination);
@@ -223,8 +245,14 @@ public class Palette implements PaletteManagementAPI {
 
     @Override
     public void askColor(Point position, IController controller) {
-       ColorOfPoint cp = new ColorOfPoint();
-       cp.setColor(position, controller);
+        action = 3;
+        System.out.println("Dans askColor");
+        this.controller = controller;
+        try {
+            bus.sendMsg("Palette:TesterPoint x=" + position.x + " y=" + position.y);
+        } catch (IvyException ex) {
+            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

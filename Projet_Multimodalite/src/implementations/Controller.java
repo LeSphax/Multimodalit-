@@ -99,8 +99,9 @@ public class Controller implements interfaces.IController {
     @Override
     public void saidColor(String color) {
         System.out.println("SAID :" + color);
-        if (color.equals("same")) {
+        if (color.equals("same") && temporaryPosition != null) {
             palette.askColor(temporaryPosition,this);
+            updateColor(null);
         } else {
             updateColor(color);
         }
