@@ -12,7 +12,7 @@ import java.awt.Point;
  *
  * @author kerbrase
  */
-public interface PaletteManagementAPI {
+public interface IPaletteController {
     
     public void createObject(Constants.Shape shape, Point position, String color);
     

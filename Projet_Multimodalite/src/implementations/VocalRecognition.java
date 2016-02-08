@@ -62,7 +62,7 @@ public class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI
     }
 
     public static void main(String args[]) throws IvyException {
-        new VocalRecognition(new Controller(new Palette()));
+        new VocalRecognition(new Controller(new PaletteController()));
     }
 
     public static void initMap() {

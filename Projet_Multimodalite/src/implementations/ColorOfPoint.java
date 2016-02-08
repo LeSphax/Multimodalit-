@@ -54,7 +54,7 @@ public class ColorOfPoint {
             bus.bindMsg("Palette:ResultatTesterPoint x=(.*) y=(.*) nom=(.*)", callback2);
             bus.start(null);
         } catch (IvyException ex) {
-            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

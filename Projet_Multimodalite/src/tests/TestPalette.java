@@ -6,7 +6,7 @@
 package tests;
 
 import fr.dgac.ivy.IvyException;
-import implementations.Palette;
+import implementations.PaletteController;
 import java.awt.Color;
 import java.awt.Point;
 
@@ -20,7 +20,7 @@ public class TestPalette {
        Point destination = new Point (20,30);
        Point intersect = new Point (55,40);
        Color color = Color.YELLOW;
-       Palette palette = new Palette();
+       PaletteController palette = new PaletteController();
        //palette.createObject(Constants.Shape.RECTANGLE, origin, null);
        //palette.moveObject(origin, destination);
        //palette.deleteObject(origin);

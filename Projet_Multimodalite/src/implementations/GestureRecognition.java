@@ -62,7 +62,7 @@ public class GestureRecognition implements GestureRecognitionAPI {
     }
 
     public GestureRecognition() {
-        controller = new Controller(new Palette());
+        controller = new Controller(new PaletteController());
         dictionary = load();
         if (dictionary == null) {
             resetDictionary();
@@ -171,7 +171,7 @@ public class GestureRecognition implements GestureRecognitionAPI {
     }
 
     public static void main(String args[]) {
-        GestureRecognition recognizer = new GestureRecognition(new Controller(new Palette()));
+        GestureRecognition recognizer = new GestureRecognition(new Controller(new PaletteController()));
         recognizer.testLoad();
     }
 
@@ -206,7 +206,7 @@ public class GestureRecognition implements GestureRecognitionAPI {
             bus.bindMsg("Palette:MouseClicked x=(.*) y=(.*)", callback4);
             bus.start(null);
         } catch (IvyException ex) {
-            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 

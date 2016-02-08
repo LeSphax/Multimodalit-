@@ -28,7 +28,7 @@ public class Controller implements interfaces.IController {
     private VocalSynthesis synthesis;
 
     private Timer t;
-    private Palette palette;
+    private PaletteController palette;
 
     private enum State {
 
@@ -39,7 +39,7 @@ public class Controller implements interfaces.IController {
         MoveWaitingForEnd
     }
 
-    public Controller(Palette palette) {
+    public Controller(PaletteController palette) {
         this.palette = palette;
         synthesis = new VocalSynthesis();
         t = new Timer(3000, (ActionEvent e) -> {

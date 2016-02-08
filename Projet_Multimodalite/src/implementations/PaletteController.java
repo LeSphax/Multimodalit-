@@ -13,18 +13,18 @@ import interfaces.Constants;
 import static interfaces.Constants.Shape.ELLIPSE;
 import static interfaces.Constants.Shape.RECTANGLE;
 import interfaces.IController;
-import interfaces.PaletteManagementAPI;
 import java.awt.Color;
 import java.awt.Point;
 import java.lang.reflect.Field;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import interfaces.IPaletteController;
 
 /**
  *
  * @author annia
  */
-public class Palette implements PaletteManagementAPI {
+public class PaletteController implements IPaletteController {
 
     private Ivy bus;
     IvyMessageListener callback, callback2;
@@ -35,9 +35,9 @@ public class Palette implements PaletteManagementAPI {
     
     private IController controller;
 
-    public Palette() {
+    public PaletteController() {
         try {
-            bus = new Ivy("Palette", "Palette ready", null);
+            bus = new Ivy("PaletteController", "PaletteController ready", null);
 
             callback = new IvyMessageListener() {
                 @Override
@@ -58,7 +58,7 @@ public class Palette implements PaletteManagementAPI {
                                         bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
                                         //shape = null;
                                     }
-                                } else if (shape.equals(nom.substring(0, 1))){
+                                } else if (shape.equals(nom.substring(0, MOVE_ACTION))){
                                    if (color != null) {
                                        System.out.println("Palette:DemanderInfo nom=" + nom + shape);
                                         bus.sendMsg("Palette:DemanderInfo nom=" + nom);
@@ -72,7 +72,7 @@ public class Palette implements PaletteManagementAPI {
 
 
                                 //}
-                            } else if (action == 1) {
+                            } else if (action == MOVE_ACTION) {
                                 if (shape == null) {
                                     if (color != null) {
                                         System.out.println("Palette:DemanderInfo null nom=" + nom);
@@ -98,7 +98,7 @@ public class Palette implements PaletteManagementAPI {
 
                             }
                         } catch (IvyException ex) {
-                            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     } else {
                         String nom = strings[2];
@@ -121,13 +121,13 @@ public class Palette implements PaletteManagementAPI {
                                 System.out.println("Delete object color" + nom);
                                 bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
                                 //color = null;
-                            } else if (action == 1){
+                            } else if (action == MOVE_ACTION){
                                 System.out.println("Move object color" + nom);
                                 bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
                             }
                         }
                     } catch (IvyException ex) {
-                        Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+                        Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
                     }
                 } else {
                     color = strings[5];
@@ -141,7 +141,7 @@ public class Palette implements PaletteManagementAPI {
             bus.bindMsg("Palette:Info nom=(.*) x=(.*) y=(.*) longueur(.*) hauteur(.*) couleurFond=(.*) couleurContour(.*)", callback2);
             bus.start(null);
         } catch (IvyException ex) {
-            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -187,13 +187,14 @@ public class Palette implements PaletteManagementAPI {
     public void moveObject(Point origin, Point destination) {
         try {
             System.out.println("sending message");
-            this.destination = new Point(destination);
-            action = 1;
+            this.destination = new Point(destination.x-origin.x,destination.y - origin.y);
+            action = MOVE_ACTION;
             bus.sendMsg("Palette:TesterPoint x=" + origin.x + " y=" + origin.y);
         } catch (IvyException ie) {
             System.out.println("can't send message");
         }
     }
+    private static final int MOVE_ACTION = 1;
 
 
     @Override
@@ -235,8 +236,8 @@ public class Palette implements PaletteManagementAPI {
            }
             this.color = color;
             System.out.println("sending message");
-            this.destination = new Point(destination);
-            action = 1;
+            this.destination = new Point(destination.x-origin.x,destination.y - origin.y);
+            action = MOVE_ACTION;
             bus.sendMsg("Palette:TesterPoint x=" + origin.x + " y=" + origin.y);
         } catch (IvyException ie) {
             System.out.println("can't send message");
@@ -251,7 +252,7 @@ public class Palette implements PaletteManagementAPI {
         try {
             bus.sendMsg("Palette:TesterPoint x=" + position.x + " y=" + position.y);
         } catch (IvyException ex) {
-            Logger.getLogger(Palette.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
