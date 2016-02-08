@@ -49,7 +49,6 @@ public class Controller implements interfaces.IController {
     }
 
     private void timerActionPerformed() throws AssertionError {
-        System.out.println(validatedPosition);
         switch (state) {
             case Init:
                 break;
@@ -98,11 +97,13 @@ public class Controller implements interfaces.IController {
 
     @Override
     public void saidColor(String color) {
-        System.out.println("SAID :" + color);
+
         if (color.equals("same") && temporaryPosition != null) {
-            palette.askColor(temporaryPosition,this);
+             System.out.println("Couleur entendue: De la même couleur");
+            palette.askColor(temporaryPosition, this);
             updateColor(null);
         } else {
+            System.out.println("Couleur entendue: " + color);
             updateColor(color);
         }
     }
@@ -139,13 +140,13 @@ public class Controller implements interfaces.IController {
 
     @Override
     public void receiveColor(String color) {
-        System.out.println("RECEIVED : " + color);
+        System.out.println("Couleur récupérée : " + color);
         updateColor(color);
     }
 
     @Override
     public void saidShape(Constants.Shape shape) {
-        System.out.println("SAID : " + shape);
+        System.out.println("Forme entendue : " + shape);
         switch (state) {
             case Init:
                 state = State.Init;
@@ -192,7 +193,7 @@ public class Controller implements interfaces.IController {
 
     @Override
     public void saidPosition() {
-        System.out.println("SAID : Position");
+        System.out.println("Position entendue");
         switch (state) {
             case Init:
                 state = State.Init;
@@ -231,7 +232,7 @@ public class Controller implements interfaces.IController {
     @Override
     public void receivePointerPosition(Point point
     ) {
-        System.out.println("Controller : ReceivePosition");
+        System.out.println("Click en :" + point);
         switch (state) {
             case Init:
                 state = State.Init;
@@ -244,13 +245,11 @@ public class Controller implements interfaces.IController {
                 } else {
                     temporaryPosition = point;
                 }
-                System.out.println(point);
                 break;
             case Delete:
                 state = State.Delete;
                 currentPosition = point;
                 t.restart();
-                System.out.println(point);
                 break;
             case MoveWaitingForStart:
                 if (currentShape != null) {
@@ -262,7 +261,6 @@ public class Controller implements interfaces.IController {
                     temporaryPosition = point;
                 }
                 t.restart();
-                System.out.println(point);
                 break;
             case MoveWaitingForEnd:
                 state = State.MoveWaitingForEnd;
@@ -273,7 +271,6 @@ public class Controller implements interfaces.IController {
                     temporaryPosition = point;
                 }
                 t.restart();
-                System.out.println(point);
                 break;
             default:
                 throw new AssertionError(state.name());
@@ -282,39 +279,52 @@ public class Controller implements interfaces.IController {
     }
 
     @Override
-    public void gestureDetected(GestureRecognitionAPI.Gesture gesture
-    ) {
-        System.out.println(gesture);
+    public void gestureDetected(GestureRecognitionAPI.Gesture gesture) {
+        switch (state){
+            case Init:
+            case Create:
+            case Delete:
+            case MoveWaitingForStart:
+            case MoveWaitingForEnd:
+                computeGesture(gesture);
+                break;
+            default:
+                throw new AssertionError(state.name());
+            
+        }
+        
+    }
+
+    private void computeGesture(GestureRecognitionAPI.Gesture gesture) throws AssertionError {
         switch (gesture) {
             case Rectangle:
                 reset();
                 state = State.Create;
                 currentShape = Constants.Shape.RECTANGLE;
-                System.out.println("Controller : RECTANGLE STATE");
+                System.out.println("Rectangle reconnu");
                 t.start();
                 break;
             case Ellipse:
                 reset();
                 state = State.Create;
                 currentShape = Constants.Shape.ELLIPSE;
-                System.out.println("Controller : ELLIPSE STATE");
+                System.out.println("Ellipse reconnue");
                 t.start();
                 break;
             case Supprimer:
                 reset();
                 state = State.Delete;
-                System.out.println("Controller : DELETE STATE");
+                System.out.println("Suppression reconnue");
                 t.start();
                 break;
             case Deplacer:
                 reset();
                 state = State.MoveWaitingForStart;
-                System.out.println("Controller : MOVE STATE");
+                System.out.println("Déplacement reconnu");
                 t.start();
                 break;
             default:
                 throw new AssertionError(gesture.name());
-
         }
     }
 

@@ -46,6 +46,20 @@ public class GestureRecognition implements GestureRecognitionAPI {
         this.currentTemplateName = currentTemplateName;
     }
 
+    /**
+     * @return the mode
+     */
+    public Mode getMode() {
+        return mode;
+    }
+
+    /**
+     * @return the currentTemplateName
+     */
+    public String getCurrentTemplateName() {
+        return currentTemplateName;
+    }
+
     public enum Mode {
 
         LEARNING,
@@ -80,9 +94,9 @@ public class GestureRecognition implements GestureRecognitionAPI {
     @Override
     public Gesture mouseReleased(Point2D.Double event) {
         currentStroke.addPoint(event);
-        switch (mode) {
+        switch (getMode()) {
             case LEARNING:
-                dictionary.add(new Template(currentStroke, currentTemplateName));
+                dictionary.add(new Template(currentStroke, getCurrentTemplateName()));
                 break;
             case RECOGNIZING:
                 Gesture gesture = recognizeGesture();
@@ -92,7 +106,7 @@ public class GestureRecognition implements GestureRecognitionAPI {
                 }
                 return gesture;
             default:
-                throw new AssertionError(mode.name());
+                throw new AssertionError(getMode().name());
 
         }
         return null;
@@ -128,7 +142,7 @@ public class GestureRecognition implements GestureRecognitionAPI {
                 case RECOGNIZING:
                     break;
                 default:
-                    throw new AssertionError(mode.name());
+                    throw new AssertionError(getMode().name());
 
             }
             mode = newMode;
@@ -168,11 +182,6 @@ public class GestureRecognition implements GestureRecognitionAPI {
 
     public void testLoad() {
         System.out.println(dictionary.size());
-    }
-
-    public static void main(String args[]) {
-        GestureRecognition recognizer = new GestureRecognition(new Controller(new PaletteController()));
-        recognizer.testLoad();
     }
 
     private void startPaletteListening() {

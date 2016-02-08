@@ -44,27 +44,22 @@ public class PaletteController implements IPaletteController {
                 public void receive(IvyClient ic, String[] strings) {
                     if (action !=3){
                         String nom;
-                        System.out.println(strings[2]);
                         nom = strings[2];
                         try {
                             if (action == 0) {
                                 //for(String n:nom){
                                 if (shape == null) {
                                     if (color != null) {
-                                        System.out.println("Palette:DemanderInfo null nom=" + nom);
                                         bus.sendMsg("Palette:DemanderInfo nom=" + nom);
                                     } else {
-                                        System.out.println("Delete object null" + nom);
                                         bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
                                         //shape = null;
                                     }
                                 } else if (shape.equals(nom.substring(0, MOVE_ACTION))){
                                    if (color != null) {
-                                       System.out.println("Palette:DemanderInfo nom=" + nom + shape);
                                         bus.sendMsg("Palette:DemanderInfo nom=" + nom);
                                     } else {
 
-                                        System.out.println("Delete object shape" + nom);
                                         bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
                                         //shape = null;
                                     }
@@ -75,19 +70,15 @@ public class PaletteController implements IPaletteController {
                             } else if (action == MOVE_ACTION) {
                                 if (shape == null) {
                                     if (color != null) {
-                                        System.out.println("Palette:DemanderInfo null nom=" + nom);
                                         bus.sendMsg("Palette:DemanderInfo nom=" + nom);
                                     } else {
-                                         System.out.println("Move object null" + nom);
                                          bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
                                         //shape = null;
                                     }
                                 } else if (shape.equals(nom.substring(0, 1))){
                                    if (color != null) {
-                                       System.out.println("Palette:DemanderInfo nom=" + nom);
                                         bus.sendMsg("Palette:DemanderInfo nom=" + nom);
                                     } else {
-                                         System.out.println("Move object shape" + nom);
                                          bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
                                         //shape = null;
                                     }
@@ -112,17 +103,14 @@ public class PaletteController implements IPaletteController {
             };
             callback2 = (IvyClient ic, String[] strings) -> {
                 if (action != 3){
-                    System.out.println(strings[5]);
                     String couleur = strings[5];
                     String nom = strings[0];
                     try {
                         if (color.equals(couleur)) {
                             if (action == 0) {
-                                System.out.println("Delete object color" + nom);
                                 bus.sendMsg("Palette:SupprimerObjet nom=" + nom);
                                 //color = null;
                             } else if (action == MOVE_ACTION){
-                                System.out.println("Move object color" + nom);
                                 bus.sendMsg("Palette:DeplacerObjet nom=" + nom + " x=" + destination.x + " y=" + destination.y);
                             }
                         }
@@ -131,7 +119,6 @@ public class PaletteController implements IPaletteController {
                     }
                 } else {
                     color = strings[5];
-                    System.out.println("Picking couleur " + color);
                     controller.receiveColor(color);
                 }
             };
@@ -148,7 +135,6 @@ public class PaletteController implements IPaletteController {
     @Override
     public void createObject(Constants.Shape shape, Point position, String stringColor) {
         try {
-            System.out.println("sending message");
             Color color;
             if (position == null) {
                 position = new Point(0, 0);
@@ -186,7 +172,6 @@ public class PaletteController implements IPaletteController {
 
     public void moveObject(Point origin, Point destination) {
         try {
-            System.out.println("sending message");
             this.destination = new Point(destination.x-origin.x,destination.y - origin.y);
             action = MOVE_ACTION;
             bus.sendMsg("Palette:TesterPoint x=" + origin.x + " y=" + origin.y);
@@ -212,7 +197,6 @@ public class PaletteController implements IPaletteController {
                     break;
             }
             this.color = color;
-            System.out.println("sending message");
             action = 0;
             bus.sendMsg("Palette:TesterPoint x=" + position.x + " y=" + position.y);
         } catch (IvyException ie) {
@@ -235,7 +219,6 @@ public class PaletteController implements IPaletteController {
                    break;
            }
             this.color = color;
-            System.out.println("sending message");
             this.destination = new Point(destination.x-origin.x,destination.y - origin.y);
             action = MOVE_ACTION;
             bus.sendMsg("Palette:TesterPoint x=" + origin.x + " y=" + origin.y);
@@ -247,7 +230,6 @@ public class PaletteController implements IPaletteController {
     @Override
     public void askColor(Point position, IController controller) {
         action = 3;
-        System.out.println("Dans askColor");
         this.controller = controller;
         try {
             bus.sendMsg("Palette:TesterPoint x=" + position.x + " y=" + position.y);

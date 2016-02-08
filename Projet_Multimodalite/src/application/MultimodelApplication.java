@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package tests;
+package application;
 
 import fr.dgac.ivy.IvyException;
 import implementations.Controller;
@@ -15,7 +15,7 @@ import implementations.VocalRecognition;
  *
  * @author kerbrase
  */
-public class TestProjetSIsitavu {
+public class MultimodelApplication {
 
     public static void main(String args[]) throws IvyException {
         System.out.println("Dans ColorOfPoint, on ne voit pas les system.out (Callback2)");

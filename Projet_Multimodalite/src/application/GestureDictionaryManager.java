@@ -3,19 +3,22 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package implementations;
+package application;
+
+import implementations.GestureRecognition;
+import implementations.GesturePanel;
 
 /**
  *
  * @author kerbrase
  */
-public class LearningFrame extends javax.swing.JFrame {
+public class GestureDictionaryManager extends javax.swing.JFrame {
 
     /**
      * Creates new form LearningFrame
      * @param recognition
      */
-    public LearningFrame(GestureRecognition recognition) {
+    public GestureDictionaryManager(GestureRecognition recognition) {
         initComponents();
         gesturePanel1.setParameters(this, recognition);
     }
@@ -39,9 +42,9 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton3 = new javax.swing.JToggleButton();
         jButton4 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
-        jToggleButton4 = new javax.swing.JToggleButton();
         jButton1 = new javax.swing.JButton();
         jToggleButton5 = new javax.swing.JToggleButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -86,15 +89,6 @@ public class LearningFrame extends javax.swing.JFrame {
             }
         });
 
-        jTextField1.setText("jTextField1");
-
-        jToggleButton4.setText("LEARNING");
-        jToggleButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton4ActionPerformed(evt);
-            }
-        });
-
         jButton1.setText("Reset");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,6 +100,13 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton5ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Learning");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -126,8 +127,8 @@ public class LearningFrame extends javax.swing.JFrame {
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -145,10 +146,10 @@ public class LearningFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(gesturePanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jToggleButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -161,10 +162,12 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton2.setSelected(false);
         jToggleButton3.setSelected(false);
         jToggleButton5.setSelected(false);
+        setText("Learning rectangle gesture");
     }//GEN-LAST:event_jToggleButton1ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         gesturePanel1.save();
+        setText("Gesture dictionary saved");
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
@@ -173,6 +176,7 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton2.setSelected(true);
         jToggleButton3.setSelected(false);
         jToggleButton5.setSelected(false);
+        setText("Learning delete gesture");
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void jToggleButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton3ActionPerformed
@@ -181,23 +185,12 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton2.setSelected(false);
         jToggleButton3.setSelected(true);
          jToggleButton5.setSelected(false);
+         setText("Learning move gesture");
     }//GEN-LAST:event_jToggleButton3ActionPerformed
-
-    private void jToggleButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton4ActionPerformed
-        System.out.println(jToggleButton4.isSelected());
-        if (jToggleButton4.getText().equals("RECOGNIZING")) {
-            jToggleButton4.setSelected(false);
-            gesturePanel1.setMode(GestureRecognition.Mode.LEARNING);
-            jToggleButton4.setText("LEARNING");
-        } else {
-            jToggleButton4.setSelected(true);
-            gesturePanel1.setMode(GestureRecognition.Mode.RECOGNIZING);
-            jToggleButton4.setText("RECOGNIZING");
-        }
-    }//GEN-LAST:event_jToggleButton4ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         gesturePanel1.reset();
+        setText("Gesture dictionary reset");
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jToggleButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton5ActionPerformed
@@ -206,7 +199,18 @@ public class LearningFrame extends javax.swing.JFrame {
         jToggleButton2.setSelected(false);
         jToggleButton3.setSelected(false);
         jToggleButton5.setSelected(true);
+        setText("Learning ellipse gesture");
     }//GEN-LAST:event_jToggleButton5ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       if (jButton2.getText().equals("Recognizing")) {
+            gesturePanel1.setMode(GestureRecognition.Mode.LEARNING);
+            jButton2.setText("Learning");
+        } else {
+            gesturePanel1.setMode(GestureRecognition.Mode.RECOGNIZING);
+            jButton2.setText("Recognizing");
+        }
+    }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -225,20 +229,23 @@ public class LearningFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(LearningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestureDictionaryManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(LearningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestureDictionaryManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(LearningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestureDictionaryManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(LearningFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(GestureDictionaryManager.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new LearningFrame(new GestureRecognition()).setVisible(true);
+                new GestureDictionaryManager(new GestureRecognition()).setVisible(true);
             }
         });
     }
@@ -246,12 +253,12 @@ public class LearningFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private implementations.GesturePanel gesturePanel1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JToggleButton jToggleButton1;
     private javax.swing.JToggleButton jToggleButton2;
     private javax.swing.JToggleButton jToggleButton3;
-    private javax.swing.JToggleButton jToggleButton4;
     private javax.swing.JToggleButton jToggleButton5;
     // End of variables declaration//GEN-END:variables
 }

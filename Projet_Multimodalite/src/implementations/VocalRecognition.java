@@ -44,26 +44,23 @@ public class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI
 
         switch (type) {
             case VocalRecognitionAPI.COLOR:
-                if (confidence > 0.5f) {
+                if (confidence > MINIMUM_CONFIDENCE) {
                     controller.saidColor(mapColors.get(value));
                 }
                 break;
             case VocalRecognitionAPI.OBJECT:
-                if (confidence > 0.5f) {
+                if (confidence > MINIMUM_CONFIDENCE) {
                     controller.saidShape(Constants.Shape.valueOf(value.toUpperCase()));
                 }
                 break;
             case VocalRecognitionAPI.POSITION:
-                if (confidence > 0.5f) {
+                if (confidence > MINIMUM_CONFIDENCE) {
                     controller.saidPosition();
                 }
                 break;
         }
     }
-
-    public static void main(String args[]) throws IvyException {
-        new VocalRecognition(new Controller(new PaletteController()));
-    }
+    private static final float MINIMUM_CONFIDENCE = 0.7f;
 
     public static void initMap() {
         mapColors = new HashMap<>();

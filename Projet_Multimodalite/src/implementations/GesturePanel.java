@@ -5,6 +5,7 @@
  */
 package implementations;
 
+import application.GestureDictionaryManager;
 import interfaces.GestureRecognitionAPI.Gesture;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -20,7 +21,7 @@ public class GesturePanel extends javax.swing.JPanel {
 
     private Stroke myStroke;
     private GestureRecognition recognition;
-    private LearningFrame parent;
+    private GestureDictionaryManager parent;
 
     private String currentTemplateName;
 
@@ -44,12 +45,25 @@ public class GesturePanel extends javax.swing.JPanel {
             public void mouseReleased(MouseEvent e) {
                 Gesture gesture = recognition.mouseReleased(new Point2D.Double(e.getPoint().x, e.getPoint().y));
                 updateStroke();
-                String display;
-                if (gesture == null) {
-                    display = "No match";
-                } else {
-                    display = gesture.toString();
+                String display = "";
+                switch (recognition.getMode()) {
+                    case LEARNING:
+                        if ( recognition.getCurrentTemplateName() != null){
+                        display = "Saved as " + recognition.getCurrentTemplateName();
+                        }
+                        else{
+                            display = "Select a gesture first";
+                        }
+                        break;
+                    case RECOGNIZING:
+                        if (gesture == null) {
+                            display = "No match";
+                        } else {
+                            display = "Recognized " +gesture.toString();
+                        }
+                        break;
                 }
+
                 parent.setText(display);
             }
         };
@@ -106,7 +120,7 @@ public class GesturePanel extends javax.swing.JPanel {
      * @param frame
      * @param recognition the recognition to set
      */
-    public void setParameters(LearningFrame frame, GestureRecognition recognition) {
+    public void setParameters(GestureDictionaryManager frame, GestureRecognition recognition) {
         parent = frame;
         this.recognition = recognition;
     }
@@ -122,11 +136,11 @@ public class GesturePanel extends javax.swing.JPanel {
         recognition.save();
     }
 
-    void setMode(GestureRecognition.Mode mode) {
+    public void setMode(GestureRecognition.Mode mode) {
         recognition.setMode(mode);
     }
 
-    void reset() {
+    public void reset() {
         recognition.resetDictionary();
     }
 }
