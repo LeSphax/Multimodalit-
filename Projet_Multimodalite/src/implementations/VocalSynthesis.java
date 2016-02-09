@@ -25,6 +25,7 @@ public class VocalSynthesis {
     }
 
     public void say(String string) {
+        System.out.println(string);
         try {
             bus.sendMsg("Virginie Say=\"" + string + "\"");
         } catch (IvyException ex) {

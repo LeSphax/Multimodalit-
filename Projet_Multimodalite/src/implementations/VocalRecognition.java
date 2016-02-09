@@ -45,11 +45,16 @@ public class VocalRecognition implements IvyMessageListener, VocalRecognitionAPI
         switch (type) {
             case VocalRecognitionAPI.COLOR:
                 if (confidence > MINIMUM_CONFIDENCE) {
-                    controller.saidColor(mapColors.get(value));
+                    if (mapColors.get(value) == null) {
+                        System.out.println("Couleur " + value);
+                    } else {
+                        controller.saidColor(mapColors.get(value));
+                    }
                 }
                 break;
             case VocalRecognitionAPI.OBJECT:
-                if (confidence > MINIMUM_CONFIDENCE) {
+                // Sra a plus de mal à reconnaitre les objets
+                if (confidence > MINIMUM_CONFIDENCE - 0.2f) {
                     controller.saidShape(Constants.Shape.valueOf(value.toUpperCase()));
                 }
                 break;

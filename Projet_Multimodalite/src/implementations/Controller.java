@@ -57,24 +57,23 @@ public class Controller implements interfaces.IController {
                 break;
             case Delete:
                 if (currentShape == null) {
-                    System.out.println("Veuillez dire la forme de l'objet à supprimer");
+                    System.out.println("Erreur : Il faut dire la forme de l'objet à supprimer");
                 } else if (currentPosition == null) {
-                    System.out.println("Veuillez pointer la position de l'objet à supprimer");
+                    System.out.println("Erreur : Il faut pointer la position de l'objet à supprimer");
                 } else {
                     palette.deleteObject(currentShape, currentColor, currentPosition);
                 }
                 break;
             case MoveWaitingForStart:
                 if (currentShape == null) {
-                    System.out.println("Veuillez dire la forme de l'objet à déplacer");
+                    System.out.println("Erreur : Il faut dire la forme de l'objet à déplacer");
                 } else if (currentPosition == null) {
-                    System.out.println("Veuillez pointer la position de l'objet à déplacer");
+                    System.out.println("Erreur : Il faut pointer la position de l'objet à déplacer");
                 }
                 break;
             case MoveWaitingForEnd:
                 if (finalPosition == null) {
-                    synthesis.say("Please point to the position where you want to move the object");
-                    System.out.println("Veuillez pointer la position où vous voulez déplacer l'objet");
+                    System.out.println("Erreur : Il faut pointer la position où vous voulez déplacer l'objet");
                 } else {
                     palette.moveObject(currentPosition, currentShape, currentColor, finalPosition);
                 }
@@ -99,9 +98,15 @@ public class Controller implements interfaces.IController {
     public void saidColor(String color) {
 
         if (color.equals("same") && temporaryPosition != null) {
-             System.out.println("Couleur entendue: De la même couleur");
+            System.out.println("Couleur entendue: De la même couleur");
             palette.askColor(temporaryPosition, this);
             updateColor(null);
+        } else if (color.equals("same") && currentPosition != null) {
+            System.out.println("Couleur entendue: De la même couleur");
+            palette.askColor(currentPosition, this);
+            updateColor(null);
+        } else if (color.equals("same") && temporaryPosition == null && currentPosition == null) {
+            System.out.println("Erreur : Pointez un objet avant de demander sa couleur");
         } else {
             System.out.println("Couleur entendue: " + color);
             updateColor(color);
@@ -280,19 +285,27 @@ public class Controller implements interfaces.IController {
 
     @Override
     public void gestureDetected(GestureRecognitionAPI.Gesture gesture) {
-        switch (state){
+        switch (state) {
             case Init:
+                computeGesture(gesture);
+                break;
             case Create:
+                computeGesture(gesture);
+                break;
             case Delete:
+                computeGesture(gesture);
+                break;
             case MoveWaitingForStart:
+                computeGesture(gesture);
+                break;
             case MoveWaitingForEnd:
                 computeGesture(gesture);
                 break;
             default:
                 throw new AssertionError(state.name());
-            
+
         }
-        
+
     }
 
     private void computeGesture(GestureRecognitionAPI.Gesture gesture) throws AssertionError {

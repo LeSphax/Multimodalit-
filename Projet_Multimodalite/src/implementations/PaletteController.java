@@ -96,7 +96,7 @@ public class PaletteController implements IPaletteController {
                         try {
                             bus.sendMsg("Palette:DemanderInfo nom=" + nom);
                         } catch (IvyException ex) {
-                            Logger.getLogger(ColorOfPoint.class.getName()).log(Level.SEVERE, null, ex);
+                            Logger.getLogger(PaletteController.class.getName()).log(Level.SEVERE, null, ex);
                         }
                     }
                 }

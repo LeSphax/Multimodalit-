@@ -101,7 +101,6 @@ public class GestureRecognition implements GestureRecognitionAPI {
             case RECOGNIZING:
                 Gesture gesture = recognizeGesture();
                 if (gesture != null) {
-                    System.out.println(gesture);
                     controller.gestureDetected(gesture);
                 }
                 return gesture;
